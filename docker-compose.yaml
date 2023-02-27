@@ -1,0 +1,95 @@
+version: "3.5"
+
+networks:
+  intra:
+    driver: bridge
+    attachable: false
+ # front-network:
+  #  driver: bridge
+ #   attachable: false
+ # back-network:
+ #   driver: bridge
+ #   attachable: false
+
+services:
+
+  pong:
+    depends_on:
+      - postgresql
+    build: "./services/pong"
+    image: nginx:mytag
+    container_name: pong
+    restart: on-failure
+    env_file:
+      - .env-local
+    ports:
+      - "80:80"
+      - "443:443"
+    expose:
+      - 5432
+    networks:
+      - intra
+
+
+  postgresql:
+    build: "./services/PostgreSQL"
+    image: postgresql:mytag
+    container_name: postgresql
+    restart: on-failure
+    env_file:
+      - .env-local
+    expose:
+      - 5432
+    networks:
+      - intra
+
+
+   #env_file: .env-local
+# add secrets for pw!
+
+
+
+
+
+
+
+
+#Usage:
+#docker-compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]
+#docker-compose -h|--help
+
+#Options:
+#  -f, --file FILE             Specify an alternate compose file
+#                              (default: docker-compose.yml)
+#  -p, --project-name NAME     Specify an alternate project name
+#                              (default: directory name)
+#Commands:
+#  build              Build or rebuild services
+#  bundle             Generate a Docker bundle from the Compose file
+#  config             Validate and view the Compose file
+#  create             Create services
+#  down               Stop and remove containers, networks, images, and volumes
+#  events             Receive real time events from containers
+#  exec               Execute a command in a running container
+#  help               Get help on a command
+#  images             List images
+#  kill               Kill containers
+#  logs               View output from containers
+#  pause              Pause services
+#  port               Print the public port for a port binding
+#  ps                 List containers
+#  pull               Pull service images
+#  push               Push service images
+#  restart            Restart services
+#  rm                 Remove stopped containers
+#  run                Run a one-off command
+#  scale              Set number of containers for a service
+#  start              Start services
+#  stop               Stop services
+#  top                Display the running processes
+#  unpause            Unpause services
+#  up                 Create and start containers
+#  version            Show the Docker-Compose version information
+#
+#
+##    sudo /etc/init.d/nginx stop
