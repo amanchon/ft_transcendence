@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import Menu from './src/components/Menu';
 
 function App() {
     return (
         <React.Fragment>
-            <div>{'Test'}</div>
-            <div>{'react setup from scratch without cra testing ts'}</div>
+            <Menu />
+
         </React.Fragment>
     );
 }
