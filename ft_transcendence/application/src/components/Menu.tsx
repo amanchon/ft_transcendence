@@ -11,22 +11,43 @@ const MenuWrapper = styled.div`
     left: 0px;
     display: block;
     border: none;
+    border-radius: 3px;
 `;
 
 const Menu = (props: any) => {
 
     return (
         <MenuWrapper id="menu">
-            <MenuButton title="Jouer" left={10} cursor='pointer' />
+            <MenuButton title="Jouer" left={10} cursor='pointer' event={() => props.navigateTo('/GameLauncher')} />
             <MenuButton
+                event={() => {}}
                 title="Amis"
                 left={25}
-                submenu={["Mes amis", "Rechercher des amis"]}
+                submenu={[{
+                    title: "Mes amis",
+                    event: () => props.navigateTo('/Friends')
+                }, {
+                    title: "Rechercher",
+                    event: () => props.navigateTo('/Friends')
+                }]}
             />
-            <MenuButton title="Salons" left={40} />
-            <MenuButton title="Invitations" left={55} cursor='pointer' />
-            <MenuButton title="Mon compte" left={70} cursor='pointer' />
-            <MenuButton title="Se déconnecter" left={85} cursor='pointer' />
+            <MenuButton
+                title="Salons"
+                left={40}
+                submenu={[{
+                    title: "Mes salons",
+                    event: () => props.navigateTo('/Chanel')
+                }, {
+                    title: "Rejoindre",
+                    event: () => props.navigateTo('/Chanel')
+                }, {
+                    title: "Créer",
+                    event: () => props.navigateTo('/Chanel')
+                }]}
+            />
+            <MenuButton title="Invitations" left={55} cursor='pointer' event={() => props.navigateTo('/Invitations')} />
+            <MenuButton title="Mon compte" left={70} cursor='pointer' event={() => props.navigateTo('/Profile')} />
+            <MenuButton title="Se déconnecter" left={85} cursor='pointer' event={props.logout} />
         </MenuWrapper>
     );
 };

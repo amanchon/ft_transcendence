@@ -7,10 +7,12 @@ module.exports = {
     entry: "./main.tsx",
     output: {
         path: path.join(__dirname, '../public'),
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: '/'
     },
     devServer: {
-        static: '../public'
+        static: '../public',
+        historyApiFallback: true
     },
     resolve: {
       // Add `.ts` and `.tsx` as a resolvable extension.
